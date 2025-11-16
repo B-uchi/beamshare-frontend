@@ -6,7 +6,7 @@ import { SessionHeader } from "@/components/session-header";
 import { FileTransferCard } from "@/components/file-transfer-card";
 import { UserPanel } from "@/components/user-panel";
 import { GlowButton } from "@/components/glow-button";
-import { Upload, Send, Users } from "lucide-react";
+import { Upload, Users } from "lucide-react";
 import { Peer, useBeamShareSession } from "@/context/BeamShareSessionContext";
 import { BeamShareClient } from "@/lib/beamshare-client";
 import { DurationSince } from "@/components/duration-since";
