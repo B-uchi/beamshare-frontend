@@ -54,7 +54,7 @@ const rtcConfig: RTCConfiguration = {
 // ----------------------------
 export function connectWS(token: string) {
   ws = new WebSocket(
-    `ws://${process.env.NEXT_PUBLIC_WS_SERVER_URL}?token=${token}`
+    `${process.env.NEXT_PUBLIC_WS_SERVER_URL}?token=${token}`
   );
 
   ws.onopen = () => {
