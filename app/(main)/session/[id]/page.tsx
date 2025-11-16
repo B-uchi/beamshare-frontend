@@ -34,8 +34,8 @@ interface SessionStats {
   activeTransfers: number;
 }
 
-const CHUNK_SIZE = 65536; // 64KB chunks (increased from 16KB for better performance)
-const MAX_CONCURRENT_CHUNKS = 4; // Send multiple chunks in parallel
+const CHUNK_SIZE = 32768; // 64KB chunks (increased from 16KB for better performance)
+const MAX_CONCURRENT_CHUNKS = 1; // Send multiple chunks in parallel
 
 export default function SessionRoomPage() {
   const { state, resetPeers, setSession, isLoading, addPeer } = useBeamShareSession();
@@ -271,7 +271,7 @@ export default function SessionRoomPage() {
         } else if (message.type === "file-end") {
           setTransfers(prev => prev.map(transfer => {
             if (transfer.id === message.fileId && transfer.receivedChunks) {
-              
+
               const blob = new Blob(transfer.receivedChunks as any);
               const url = URL.createObjectURL(blob);
               
