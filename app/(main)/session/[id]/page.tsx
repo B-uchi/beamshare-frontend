@@ -271,7 +271,8 @@ export default function SessionRoomPage() {
         } else if (message.type === "file-end") {
           setTransfers(prev => prev.map(transfer => {
             if (transfer.id === message.fileId && transfer.receivedChunks) {
-              const blob = new Blob(transfer.receivedChunks);
+              
+              const blob = new Blob(transfer.receivedChunks as any);
               const url = URL.createObjectURL(blob);
               
               const a = document.createElement("a");
