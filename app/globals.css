@@ -1,26 +1,151 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* BeamShare minimal color palette */
+  --background: #0a0e14;
+  --foreground: #e8eaed;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --secondary: #06b6d4;
+  --accent: #ec4899;
+  --text-secondary: #9ca3af;
+  --border-color: rgba(255, 255, 255, 0.08);
+
+  --card: #0f1419;
+  --card-foreground: #e8eaed;
+  --popover: #0f1419;
+  --popover-foreground: #e8eaed;
+  --primary-foreground: #ffffff;
+  --secondary-foreground: #ffffff;
+  --muted: #6b7280;
+  --muted-foreground: #e8eaed;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.04);
+  --ring: #6366f1;
+  --chart-1: #5b2eff;
+  --chart-2: #00e5ff;
+  --chart-3: #ff3cac;
+  --chart-4: #1de9b6;
+  --chart-5: #ffc107;
+  --radius: 0.75rem;
+  --sidebar: #0f1115;
+  --sidebar-foreground: #eaeaea;
+  --sidebar-primary: #5b2eff;
+  --sidebar-primary-foreground: #eaeaea;
+  --sidebar-accent: #00e5ff;
+  --sidebar-accent-foreground: #0f1015;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #5b2eff;
 }
 
 @theme inline {
+  --font-sans: "Space Grotesk", "Satoshi", sans-serif;
+  --font-mono: "Fira Code", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: #ffffff;
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* simplified glass effect - minimal backdrop blur and transparency */
+  .glass {
+    background-color: var(--surface);
+    @apply backdrop-blur-sm border border-white/5 rounded-xl;
+  }
+
+  .glass:hover {
+    background-color: var(--surface-hover);
+  }
+
+  /* subtle glow effects */
+  .glow-soft {
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+  }
+
+  /* removed @apply gradient, using pure CSS instead to avoid Tailwind parsing issues */
+  .gradient-text {
+    background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* minimal animations */
+  @keyframes subtle-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-subtle-pulse {
+    animation: subtle-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
 }
