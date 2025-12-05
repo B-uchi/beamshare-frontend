@@ -40,6 +40,8 @@ let clientId: string | null = null;
 const peers: PeerMap = {};
 const channels: ChannelMap = {};
 const pendingCandidates: CandidateQueueMap = {};
+const chunkQueue: Record<string, (string | ArrayBuffer | Blob)[]> = {};
+const MAX_BUFFERED_AMOUNT = 64 * 1024; // 64KB limit before buffering
 
 // Track active transfers for cancellation
 const activeTransfers = new Map<string, boolean>();
@@ -53,12 +55,19 @@ const rtcConfig: RTCConfiguration = {
 // 1. CONNECT TO WEBSOCKET
 // ----------------------------
 export function connectWS(token: string) {
+  if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+    console.log("[WS] Already connected or connecting");
+    return;
+  }
+
   ws = new WebSocket(
     `${process.env.NEXT_PUBLIC_WS_SERVER_URL}?token=${token}`
   );
 
   ws.onopen = () => {
     console.log("%c[WS] Connected", "color: #03A9F4");
+    // If we have a pending reconnect, we could trigger it here, 
+    // but the UI handles it via attemptReconnect
   };
   ws.onmessage = handleWSMessage;
   ws.onclose = () => {
@@ -123,6 +132,12 @@ function handleWSMessage(ev: MessageEvent) {
 
     case "reconnected-host":
       handleReconnectedHost(data);
+      break;
+
+    case "host-reconnected":
+      // Peers receive this when host comes back
+      onPeerJoined(data.hostId, "Host", data.sessionId!);
+      broadcastHostReconnected(data.hostId, data.sessionId!);
       break;
 
     case "peer-reconnected":
@@ -242,8 +257,23 @@ function handleReconnected(data: any) {
 }
 
 function handleReconnectedHost(data: any) {
-  const customEvent = new CustomEvent("beamshare:host-reconnected", {
+  const customEvent = new CustomEvent("beamshare:host-reconnected-success", {
     detail: data,
+  });
+  window.dispatchEvent(customEvent);
+
+  // Host needs to re-initiate connections to all peers
+  if (data.connectedPeers && Array.isArray(data.connectedPeers)) {
+    console.log("[RTC] Host reconnected, initiating connections to peers:", data.connectedPeers);
+    data.connectedPeers.forEach((peer: Peer) => {
+      onPeerJoined(peer.clientId, peer.name, data.sessionId);
+    });
+  }
+}
+
+function broadcastHostReconnected(hostId: string, sessionId: string) {
+  const customEvent = new CustomEvent("beamshare:host-back", {
+    detail: { clientId: hostId, sessionId },
   });
   window.dispatchEvent(customEvent);
 }
@@ -454,16 +484,48 @@ function setupChannelEvents(peerId: string, channel: RTCDataChannel) {
     });
     window.dispatchEvent(customEvent);
   };
+
+  channel.onbufferedamountlow = () => {
+    flushQueue(peerId);
+  };
 }
 
 // ----------------------------
 // 8. BROADCAST/SEND CHUNKS
 // ----------------------------
+// ----------------------------
+// 8. BROADCAST/SEND CHUNKS (WITH BACKPRESSURE)
+// ----------------------------
+
+function flushQueue(peerId: string) {
+  const channel = channels[peerId];
+  const queue = chunkQueue[peerId];
+
+  if (!channel || !queue || queue.length === 0) return;
+
+  while (queue.length > 0 && channel.bufferedAmount < MAX_BUFFERED_AMOUNT) {
+    const chunk = queue.shift();
+    if (chunk) {
+      try {
+        channel.send(chunk as string);
+      } catch (e) {
+        console.error(`[RTC] Error sending queued chunk to ${peerId}:`, e);
+        // Put it back? Or drop? For now, we might lose it if error, but usually it's state error.
+        // If closed, we should clear queue.
+        if (channel.readyState !== "open") {
+          chunkQueue[peerId] = [];
+          return;
+        }
+      }
+    }
+  }
+}
+
 export function broadcastChunk(chunk: ArrayBuffer | Blob | string) {
   let sentCount = 0;
   Object.entries(channels).forEach(([peerId, ch]) => {
     if (ch.readyState === "open") {
-      ch.send(chunk as string);
+      sendChunkToPeer(peerId, chunk);
       sentCount++;
     }
   });
@@ -475,11 +537,25 @@ export function sendChunkToPeer(
   chunk: ArrayBuffer | Blob | string
 ) {
   const channel = channels[peerId];
-  if (channel && channel.readyState === "open") {
+  if (!channel || channel.readyState !== "open") {
+    console.warn(`[RTC] Cannot send to ${peerId}, channel not open`);
+    return false;
+  }
+
+  if (channel.bufferedAmount > MAX_BUFFERED_AMOUNT) {
+    // Buffer full, queue it
+    if (!chunkQueue[peerId]) chunkQueue[peerId] = [];
+    chunkQueue[peerId].push(chunk);
+    return true; // We accepted it for delivery
+  }
+
+  try {
     channel.send(chunk as string);
     return true;
+  } catch (e) {
+    console.error(`[RTC] Error sending chunk to ${peerId}:`, e);
+    return false;
   }
-  return false;
 }
 
 // ----------------------------
@@ -514,6 +590,7 @@ function cleanupPeer(peerId: string) {
   if (channels[peerId]) {
     channels[peerId].close();
     delete channels[peerId];
+    delete chunkQueue[peerId];
   }
 
   if (peers[peerId]) {
@@ -529,22 +606,55 @@ function cleanupPeer(peerId: string) {
 // ----------------------------
 // 11. RECONNECT
 // ----------------------------
-export function attemptReconnect(
+export async function attemptReconnect(
   previousSessionId: string,
   previousClientId: string,
   isHost: boolean,
   name: string
 ) {
+  try {
+    await waitForOpenConnection();
+    ws?.send(
+      JSON.stringify({
+        type: "reconnect",
+        sessionId: previousSessionId,
+        clientId: previousClientId,
+        isHost,
+        name,
+      })
+    );
+  } catch (e) {
+    console.error("[WS] Failed to reconnect:", e);
+  }
+}
 
-  ws?.send(
-    JSON.stringify({
-      type: "reconnect",
-      sessionId: previousSessionId,
-      clientId: previousClientId,
-      isHost,
-      name,
-    })
-  );
+function waitForOpenConnection(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (ws?.readyState === WebSocket.OPEN) {
+      resolve();
+      return;
+    }
+    if (!ws) {
+      reject(new Error("WebSocket not initialized"));
+      return;
+    }
+    
+    const checkInterval = setInterval(() => {
+      if (ws?.readyState === WebSocket.OPEN) {
+        clearInterval(checkInterval);
+        resolve();
+      } else if (ws?.readyState === WebSocket.CLOSED) {
+        clearInterval(checkInterval);
+        reject(new Error("WebSocket closed"));
+      }
+    }, 100);
+    
+    // Timeout after 5s
+    setTimeout(() => {
+      clearInterval(checkInterval);
+      reject(new Error("WebSocket connection timeout"));
+    }, 5000);
+  });
 }
 
 function isWSOpen() {
