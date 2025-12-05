@@ -192,10 +192,54 @@ export default function SessionRoomPage() {
       router.push("/terminated");
     };
 
+    const hostDisconnectedHandler = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      console.log("[Host Disconnected]:", customEvent.detail.hostId);
+      toast.warning("Host disconnected. Waiting for reconnect...", { duration: Infinity, id: "host-disconnect" });
+      // Optionally mark host as offline in UI
+    };
+
+    const hostBackHandler = (e: Event) => {
+      console.log("[Host Back] Host has reconnected");
+      toast.dismiss("host-disconnect");
+      toast.success("Host has reconnected");
+    };
+
+    const peerDisconnectedHandler = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const { clientId } = customEvent.detail;
+      console.log("[Peer Disconnected]:", clientId);
+      
+      const peer = getPeerRef.current(clientId);
+      if (peer) {
+        toast.warning(`${peer.name} disconnected`, { id: `peer-disconnect-${clientId}` });
+      }
+      
+      // We can either remove them or mark them as offline. 
+      // For now, let's remove them to avoid "ghost" peers if they come back with a new ID (though they shouldn't)
+      // But actually, if they reconnect, they might keep the same ID.
+      // Let's remove them from the active list so they don't show up as valid targets.
+      removePeerRef.current(clientId);
+    };
+
+    const peerReconnectedHandler = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const data = customEvent.detail;
+      
+      toast.dismiss(`peer-disconnect-${data.clientId}`);
+      toast.success(`${data.name} reconnected`);
+      
+      // Another peer has reconnected
+      console.log("[Peer Reconnect] Peer reconnected:", data.clientId, data.name);
+      addPeerRef.current({ clientId: data.clientId, name: data.name });
+    };
+
     window.addEventListener("beamshare:host-reconnected-success", hostReconnectedHandler);
     window.addEventListener("beamshare:host-back", hostBackHandler);
+    window.addEventListener("beamshare:host-disconnected", hostDisconnectedHandler);
     window.addEventListener("beamshare:reconnected", reconnectedHandler);
     window.addEventListener("beamshare:peer-reconnected", peerReconnectedHandler);
+    window.addEventListener("beamshare:peer-disconnected", peerDisconnectedHandler);
     window.addEventListener("beamshare:new-peer", newPeerHandler);
     window.addEventListener("beamshare:peer-left", peerLeftHandler);
     window.addEventListener("beamshare:session-ended", sessionEndedHandler);
@@ -204,8 +248,10 @@ export default function SessionRoomPage() {
     return () => {
       window.removeEventListener("beamshare:host-reconnected-success", hostReconnectedHandler);
       window.removeEventListener("beamshare:host-back", hostBackHandler);
+      window.removeEventListener("beamshare:host-disconnected", hostDisconnectedHandler);
       window.removeEventListener("beamshare:reconnected", reconnectedHandler);
       window.removeEventListener("beamshare:peer-reconnected", peerReconnectedHandler);
+      window.removeEventListener("beamshare:peer-disconnected", peerDisconnectedHandler);
       window.removeEventListener("beamshare:new-peer", newPeerHandler);
       window.removeEventListener("beamshare:peer-left", peerLeftHandler);
       window.removeEventListener("beamshare:session-ended", sessionEndedHandler);

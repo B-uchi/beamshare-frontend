@@ -145,6 +145,17 @@ function handleWSMessage(ev: MessageEvent) {
       broadcastPeerReconnected(data.clientId, data.name);
       break;
 
+    case "peer-disconnected":
+      cleanupPeer(data.clientId);
+      broadcastPeerDisconnected(data.clientId);
+      break;
+
+    case "host-disconnected":
+      // Host is gone temporarily
+      cleanupPeer(data.hostId);
+      broadcastHostDisconnected(data.hostId);
+      break;
+
     case "error":
       console.error("[WS ERROR]:", data.message);
       if ((data.message || "").toLowerCase().includes("session not found")) {
@@ -285,6 +296,20 @@ function broadcastPeerReconnected(clientId: string, name: string) {
   window.dispatchEvent(customEvent);
 }
 
+function broadcastPeerDisconnected(clientId: string) {
+  const customEvent = new CustomEvent("beamshare:peer-disconnected", {
+    detail: { clientId },
+  });
+  window.dispatchEvent(customEvent);
+}
+
+function broadcastHostDisconnected(hostId: string) {
+  const customEvent = new CustomEvent("beamshare:host-disconnected", {
+    detail: { hostId },
+  });
+  window.dispatchEvent(customEvent);
+}
+
 // ----------------------------
 // 3. HOST: PEER JOINED → CREATE OFFER
 // ----------------------------
@@ -294,6 +319,9 @@ async function onPeerJoined(
   joinSessionId: string
 ) {
   console.log("[RTC] New peer joined:", peerId, name);
+
+  // Ensure we clean up any old connection for this peer first!
+  cleanupPeer(peerId);
 
   broadcastNewPeerJoined(peerId!, name!);
 
@@ -333,6 +361,9 @@ async function onPeerJoined(
 // ----------------------------
 async function onOffer(from: string, offer: RTCSessionDescriptionInit) {
   console.log("[RTC] Received offer from:", from);
+
+  // Ensure we clean up any old connection for this peer first!
+  cleanupPeer(from);
 
   const pc = new RTCPeerConnection(rtcConfig);
   peers[from] = pc;
