@@ -522,9 +522,6 @@ function setupChannelEvents(peerId: string, channel: RTCDataChannel) {
 }
 
 // ----------------------------
-// 8. BROADCAST/SEND CHUNKS
-// ----------------------------
-// ----------------------------
 // 8. BROADCAST/SEND CHUNKS (WITH BACKPRESSURE)
 // ----------------------------
 
@@ -541,8 +538,6 @@ function flushQueue(peerId: string) {
         channel.send(chunk as string);
       } catch (e) {
         console.error(`[RTC] Error sending queued chunk to ${peerId}:`, e);
-        // Put it back? Or drop? For now, we might lose it if error, but usually it's state error.
-        // If closed, we should clear queue.
         if (channel.readyState !== "open") {
           chunkQueue[peerId] = [];
           return;

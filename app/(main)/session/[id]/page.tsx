@@ -34,13 +34,12 @@ interface SessionStats {
   activeTransfers: number;
 }
 
-const CHUNK_SIZE = 32768; // 64KB chunks (increased from 16KB for better performance)
-const MAX_CONCURRENT_CHUNKS = 1; // Send multiple chunks in parallel
+const CHUNK_SIZE = 32768; 
+const MAX_CONCURRENT_CHUNKS = 1; 
 
 export default function SessionRoomPage() {
   const { state, resetPeers, setSession, isLoading, addPeer, removePeer, getPeer } = useBeamShareSession();
   
-  // Refs to access latest functions in event listeners without triggering re-renders
   const addPeerRef = useRef(addPeer);
   const removePeerRef = useRef(removePeer);
   const getPeerRef = useRef(getPeer);
@@ -85,12 +84,6 @@ export default function SessionRoomPage() {
       // 2. The WebSocket is NOT already connected
       // 3. The session matches the current URL
       if (state.sessionId && state.clientId && state.sessionId === sessionCode) {
-        // Check if WebSocket is already connected
-        // if (BeamShareClient.isWSOpen()) {
-        //   console.log("[Reconnect] WebSocket already connected, skipping reconnect");
-        //   return;
-        // }
-
         // Check if we just navigated here (not a refresh)
         const navigationEntry = window.performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigationEntry && navigationEntry.type === 'navigate') {
@@ -140,7 +133,6 @@ export default function SessionRoomPage() {
       const customEvent = e as CustomEvent;
       const data = customEvent.detail;
       
-      // We successfully reconnected as a peer
       console.log("[Peer Reconnect] Successfully reconnected");
       resetPeers();
       if (data.connectedPeers) {
@@ -195,7 +187,6 @@ export default function SessionRoomPage() {
       const customEvent = e as CustomEvent;
       console.log("[Host Disconnected]:", customEvent.detail.hostId);
       toast.warning("Host disconnected. Waiting for reconnect...", { duration: Infinity, id: "host-disconnect" });
-      // Optionally mark host as offline in UI
     };
 
     const hostBackHandler = (e: Event) => {
@@ -214,10 +205,6 @@ export default function SessionRoomPage() {
         toast.warning(`${peer.name} disconnected`, { id: `peer-disconnect-${clientId}` });
       }
       
-      // We can either remove them or mark them as offline. 
-      // For now, let's remove them to avoid "ghost" peers if they come back with a new ID (though they shouldn't)
-      // But actually, if they reconnect, they might keep the same ID.
-      // Let's remove them from the active list so they don't show up as valid targets.
       removePeerRef.current(clientId);
     };
 
