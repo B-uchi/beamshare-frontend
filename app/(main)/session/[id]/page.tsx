@@ -38,7 +38,18 @@ const CHUNK_SIZE = 32768; // 64KB chunks (increased from 16KB for better perform
 const MAX_CONCURRENT_CHUNKS = 1; // Send multiple chunks in parallel
 
 export default function SessionRoomPage() {
-  const { state, resetPeers, setSession, isLoading, addPeer } = useBeamShareSession();
+  const { state, resetPeers, setSession, isLoading, addPeer, removePeer, getPeer } = useBeamShareSession();
+  
+  // Refs to access latest functions in event listeners without triggering re-renders
+  const addPeerRef = useRef(addPeer);
+  const removePeerRef = useRef(removePeer);
+  const getPeerRef = useRef(getPeer);
+
+  useEffect(() => {
+    addPeerRef.current = addPeer;
+    removePeerRef.current = removePeer;
+    getPeerRef.current = getPeer;
+  }, [addPeer, removePeer, getPeer]);
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
@@ -125,11 +136,6 @@ export default function SessionRoomPage() {
       setIsReconnecting(false);
     };
 
-    const hostBackHandler = (e: Event) => {
-      console.log("[Host Back] Host has reconnected");
-      toast.success("Host has reconnected");
-    };
-
     const reconnectedHandler = (e: Event) => {
       const customEvent = e as CustomEvent;
       const data = customEvent.detail;
@@ -145,14 +151,7 @@ export default function SessionRoomPage() {
       setIsReconnecting(false);
     };
 
-    const peerReconnectedHandler = (e: Event) => {
-      const customEvent = e as CustomEvent;
-      const data = customEvent.detail;
-      
-      // Another peer has reconnected
-      console.log("[Peer Reconnect] Peer reconnected:", data.clientId, data.name);
-      addPeer({ clientId: data.clientId, name: data.name });
-    };
+
 
     const newPeerHandler = (e: Event) => {
       const customEvent = e as CustomEvent;
