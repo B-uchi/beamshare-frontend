@@ -1,43 +1,40 @@
-# BeamShare - Frontend
+# Hop
 
-The frontend for **BeamShare**, a lightning-fast, peer-to-peer file sharing application built with Next.js.
+**Direct service. No stops in between.** Hop sends files and text straight from one browser to another over WebRTC. No uploads, no accounts, nothing stored on a server.
 
-### 🛠 Tech Stack
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **Library:** [React 19](https://react.dev/)
-- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
-- **UI Components:** [Radix UI](https://www.radix-ui.com/) primitives & [Shadcn UI](https://ui.shadcn.com/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Communication:** [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) & [WebRTC](https://webrtc.org/)
+## Features
 
-### 📂 Module Structure
-- **`app/`**: Next.js App Router directory.
-  - `(main)/`: Core application routes (Create, Join, Session views).
-  - `api/`: Internal API routes for token generation or session metadata.
-- **`components/`**: Reusable React components.
-  - `file-transfer-card.tsx`: Manages file staging, sending, and reassembly.
-  - `user-list.tsx`: Real-time list of connected peers in a session.
-  - `particle-background.tsx`: Engaging visual background for a premium feel.
-  - `ui/`: Base design system components.
-- **`context/`**: 
-  - `BeamShareSessionContext.tsx`: Global state for active sessions, handling connectivity and peer events.
-- **`lib/`**:
-  - `beamshare-client.ts`: The core engine for P2P communication. Manages WebRTC `RTCPeerConnection` instances and data channels.
-  - `utils.ts`: Tailwind CSS class merging and other utilities.
-- **`hooks/`**: 
-  - `use-mobile.tsx`: Responsive detection for mobile-optimized layouts.
+- Rooms with a 6-character code, shareable link and QR code; join from any modern browser
+- Everyone can send — to everyone in the room or to one person
+- Files (pick, drag anywhere, or paste) and text snippets with one-tap copy
+- Live progress, speed and ETA on a departures-and-arrivals board; cancel from either side; delivery confirmation
+- Optional "ask first" mode to accept or decline each incoming file
+- Host controls: lock the room, remove people, end it
+- Survives refreshes, sleeping phones and network switches: seats are resumed and peer links redialled automatically
+- Light and dark themes, keyboard and screen-reader friendly
 
-### 🚀 Getting Started
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-2. **Environment Setup**:
-   Configure `.env` with your signaling server URL and JWT secret.
-3. **Run Development Server**:
-   ```bash
-   npm run dev
-   ```
+## How it's built
 
----
-*Built for speed, security, and simplicity.*
+- `lib/hop/signaling.ts` — WebSocket client: jittered back-off reconnect, app-level heartbeat to catch half-open sockets, reconnects on `online` / tab visibility
+- `lib/hop/mesh.ts` — one `RTCPeerConnection` per peer (full mesh), glare-safe negotiation (polite/impolite by id), per-connection ids so stale ICE is ignored, watchdog redial, relay detection
+- `lib/hop/client.ts` — room lifecycle, transfer engine (64 KB binary chunks, buffered-amount back-pressure, per-peer serial queue, accept/decline/cancel/ack) and a `useSyncExternalStore` store
+- `lib/hop/protocol.ts` — wire types shared with the signaling server
+- `app/api/token` — issues short-lived JWTs for the signaling server and hands out ICE servers (TURN credentials stay server-side)
+
+Design system: see `DESIGN.md` · product notes: `PRODUCT.md`.
+
+## Running locally
+
+```bash
+npm install
+cp .env.example .env.local   # fill in values
+npm run dev
+```
+
+Run the [signaling server](../backend) alongside it with the same `JWT_SECRET`.
+
+| Variable | |
+| --- | --- |
+| `NEXT_PUBLIC_WS_SERVER_URL` | Signaling server URL, e.g. `ws://localhost:8080` or `wss://signal.example.com` |
+| `JWT_SECRET` | Same secret as the signaling server |
+| `TURN_URLS`, `TURN_USERNAME`, `TURN_CREDENTIAL` | Optional TURN relay for networks that block direct connections |

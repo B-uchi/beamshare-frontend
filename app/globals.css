@@ -1,151 +1,430 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Hop — "Direct Service": station signage. Enamel panels, one cobalt line colour,
+   signal yellow for anything live, a departures board for transfers. */
 
 :root {
-  /* BeamShare minimal color palette */
-  --background: #0a0e14;
-  --foreground: #e8eaed;
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-hover: rgba(255, 255, 255, 0.06);
-  --primary: #6366f1;
-  --primary-light: #818cf8;
-  --secondary: #06b6d4;
-  --accent: #ec4899;
-  --text-secondary: #9ca3af;
-  --border-color: rgba(255, 255, 255, 0.08);
+  color-scheme: light;
+  --ground: #eceef1;
+  --panel: #ffffff;
+  --panel-2: #f6f7f9;
+  --ink: #0f1420;
+  --ink-2: #4a5263;
+  --ink-3: #6b7385;
+  --rule: #d3d7de;
+  --rule-strong: #b8bec9;
 
-  --card: #0f1419;
-  --card-foreground: #e8eaed;
-  --popover: #0f1419;
-  --popover-foreground: #e8eaed;
-  --primary-foreground: #ffffff;
-  --secondary-foreground: #ffffff;
-  --muted: #6b7280;
-  --muted-foreground: #e8eaed;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.04);
-  --ring: #6366f1;
-  --chart-1: #5b2eff;
-  --chart-2: #00e5ff;
-  --chart-3: #ff3cac;
-  --chart-4: #1de9b6;
-  --chart-5: #ffc107;
-  --radius: 0.75rem;
-  --sidebar: #0f1115;
-  --sidebar-foreground: #eaeaea;
-  --sidebar-primary: #5b2eff;
-  --sidebar-primary-foreground: #eaeaea;
-  --sidebar-accent: #00e5ff;
-  --sidebar-accent-foreground: #0f1015;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #5b2eff;
+  --cobalt: #1a3bc7;
+  --cobalt-deep: #1430a6;
+  --cobalt-ink: #ffffff;
+  --cobalt-ink-2: #cdd5f5;
+  --cobalt-tint: #e7ebfa;
+
+  --signal: #ffc400;
+  --signal-hover: #ffd23f;
+  --signal-ink: #1a1400;
+
+  --board: #10151f;
+  --board-2: #19202d;
+  --board-ink: #f2f4f8;
+  --board-ink-2: #9aa3b5;
+  --board-rule: #262e3d;
+  --board-stop: #ff7a6b;
+
+  --go: #0e8a4a;
+  --stop: #d3261c;
+  --stop-tint: #fbe9e7;
+
+  --radius: 6px;
+  --radius-sign: 10px;
+  --shadow-1: 0 1px 2px rgb(15 20 32 / 0.06), 0 2px 8px rgb(15 20 32 / 0.06);
+  --shadow-2: 0 2px 4px rgb(15 20 32 / 0.06), 0 12px 32px rgb(15 20 32 / 0.12);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ground: #0a0d14;
+    --panel: #121722;
+    --panel-2: #171d2a;
+    --ink: #eef1f6;
+    --ink-2: #a3abbb;
+    --ink-3: #8790a3;
+    --rule: #262d3b;
+    --rule-strong: #343c4d;
+
+    --cobalt: #2f52e0;
+    --cobalt-deep: #2443c4;
+    --cobalt-ink-2: #d3dbff;
+    --cobalt-tint: #18213f;
+
+    --board: #161c29;
+    --board-2: #1f2737;
+    --board-rule: #2c3547;
+
+    --go: #2fbf6f;
+    --stop: #f0533f;
+    --stop-tint: #2a1513;
+
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-2: 0 2px 4px rgb(0 0 0 / 0.3), 0 16px 40px rgb(0 0 0 / 0.5);
+  }
 }
 
 @theme inline {
-  --font-sans: "Space Grotesk", "Satoshi", sans-serif;
-  --font-mono: "Fira Code", monospace;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: #ffffff;
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 8px);
-  --radius-md: calc(var(--radius) - 4px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow-condensed), var(--font-barlow), ui-sans-serif, sans-serif;
+
+  --color-ground: var(--ground);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-deep: var(--cobalt-deep);
+  --color-cobalt-ink: var(--cobalt-ink);
+  --color-cobalt-ink-2: var(--cobalt-ink-2);
+  --color-cobalt-tint: var(--cobalt-tint);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-board: var(--board);
+  --color-board-2: var(--board-2);
+  --color-board-ink: var(--board-ink);
+  --color-board-ink-2: var(--board-ink-2);
+  --color-board-rule: var(--board-rule);
+  --color-board-stop: var(--board-stop);
+  --color-go: var(--go);
+  --color-stop: var(--stop);
+  --color-stop-tint: var(--stop-tint);
+
+  --radius-sign: var(--radius-sign);
+  --ease-out: var(--ease-out);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--rule);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--signal);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--signal);
+    color: var(--signal-ink);
   }
 }
 
 @layer components {
-  /* simplified glass effect - minimal backdrop blur and transparency */
-  .glass {
-    background-color: var(--surface);
-    @apply backdrop-blur-sm border border-white/5 rounded-xl;
+  /* Enamel sign: cobalt field with a white keyline set in from the edge. */
+  .sign {
+    background: var(--cobalt);
+    color: var(--cobalt-ink);
+    border-radius: var(--radius-sign);
+    box-shadow:
+      inset 0 0 0 6px var(--cobalt),
+      inset 0 0 0 8px rgb(255 255 255 / 0.92);
+  }
+  .sign-tight {
+    box-shadow:
+      inset 0 0 0 4px var(--cobalt),
+      inset 0 0 0 5.5px rgb(255 255 255 / 0.92);
   }
 
-  .glass:hover {
-    background-color: var(--surface-hover);
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sign);
   }
 
-  /* subtle glow effects */
-  .glow-soft {
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+  .tnum {
+    font-variant-numeric: tabular-nums;
   }
 
-  /* removed @apply gradient, using pure CSS instead to avoid Tailwind parsing issues */
-  .gradient-text {
-    background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 1.125rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background-color 150ms var(--ease-out),
+      color 150ms var(--ease-out),
+      border-color 150ms var(--ease-out),
+      transform 100ms var(--ease-out);
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-sm {
+    height: 2.25rem;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+  }
+  .btn-lg {
+    height: 3.5rem;
+    padding: 0 1.5rem;
+    font-size: 1.0625rem;
+  }
+  .btn-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+  }
+  .btn-primary {
+    background: var(--cobalt);
+    color: var(--cobalt-ink);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--cobalt-deep);
+  }
+  .btn-signal {
+    background: var(--signal);
+    color: var(--signal-ink);
+  }
+  .btn-signal:hover:not(:disabled) {
+    background: var(--signal-hover);
+  }
+  .btn-outline {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--rule-strong);
+  }
+  .btn-outline:hover:not(:disabled) {
+    border-color: var(--ink-3);
+    background: var(--panel-2);
+  }
+  .btn-ghost {
+    color: var(--ink-2);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    color: var(--ink);
+    background: color-mix(in oklab, var(--rule) 55%, transparent);
+  }
+  .btn-on-cobalt {
+    background: var(--cobalt-ink);
+    color: var(--cobalt);
+  }
+  .btn-on-cobalt:hover:not(:disabled) {
+    background: var(--cobalt-tint);
+  }
+  .btn-cobalt-ghost {
+    color: var(--cobalt-ink);
+    border: 1px solid rgb(255 255 255 / 0.4);
+  }
+  .btn-cobalt-ghost:hover:not(:disabled) {
+    background: rgb(255 255 255 / 0.12);
+    border-color: rgb(255 255 255 / 0.7);
+  }
+  .btn-danger {
+    background: var(--stop);
+    color: #fff;
+  }
+  .btn-danger:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--stop) 85%, black);
+  }
+  .btn-board {
+    color: var(--board-ink);
+    border: 1px solid var(--board-rule);
+  }
+  .btn-board:hover:not(:disabled) {
+    background: var(--board-2);
+    border-color: var(--board-ink-2);
   }
 
-  /* minimal animations */
-  @keyframes subtle-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+  /* Form fields */
+  .field {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 0.875rem;
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: border-color 150ms var(--ease-out);
+  }
+  .field::placeholder {
+    color: var(--ink-3);
+  }
+  .field:hover {
+    border-color: var(--ink-3);
+  }
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--cobalt);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--cobalt) 25%, transparent);
+  }
+  .label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.375rem;
   }
 
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Pictogram tile: icon on a cobalt square, like station wayfinding. */
+  .picto {
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    background: var(--cobalt);
+    color: var(--cobalt-ink);
+    flex: none;
   }
 
-  .animate-subtle-pulse {
-    animation: subtle-pulse 3s ease-in-out infinite;
+  /* Departure-board rows enter like a flap turning over. */
+  .flap-in {
+    animation: flap-in 320ms var(--ease-out) both;
   }
 
-  .animate-fade-in {
-    animation: fade-in 0.5s ease-out;
+  .prose-hop {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .prose-hop h2 {
+    font-size: 1.875rem;
+    line-height: 1.1;
+    color: var(--ink);
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-hop h3 {
+    font-size: 1.25rem;
+    color: var(--ink);
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-hop p,
+  .prose-hop ul {
+    margin-bottom: 1rem;
+  }
+  .prose-hop ul {
+    list-style: none;
+    padding: 0;
+  }
+  .prose-hop li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-hop li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    border: 2px solid var(--cobalt);
+  }
+  .prose-hop strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose-hop a {
+    color: var(--cobalt);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-hop code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+    background: var(--panel-2);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.05em 0.35em;
+    color: var(--ink);
+  }
+}
+
+@keyframes flap-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes board-sheen {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.live-dot {
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

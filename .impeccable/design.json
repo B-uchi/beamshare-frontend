@@ -1,0 +1,621 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T22:27:30.202166+00:00",
+  "title": "Design System: Hop",
+  "extensions": {
+    "colorMeta": {
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Line Cobalt",
+        "canonical": "#1a3bc7",
+        "tonalRamp": [
+          "#02003c",
+          "#061565",
+          "#183392",
+          "#2d52c0",
+          "#4774f6",
+          "#6f9eff",
+          "#9ac7ff",
+          "#c3ecff"
+        ],
+        "dark": "#2f52e0"
+      },
+      "cobalt-deep": {
+        "role": "primary",
+        "displayName": "Cobalt Deep",
+        "canonical": "#1430a6",
+        "tonalRamp": [
+          "#01003a",
+          "#071762",
+          "#1a358e",
+          "#3053bb",
+          "#4a76f0",
+          "#729fff",
+          "#9dc7ff",
+          "#c5edff"
+        ],
+        "dark": "#2443c4"
+      },
+      "cobalt-ink": {
+        "role": "primary",
+        "displayName": "Sign White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#808080",
+          "#a4a4a4",
+          "#cacaca",
+          "#eeeeee"
+        ]
+      },
+      "cobalt-ink-2": {
+        "role": "primary",
+        "displayName": "Sign Haze",
+        "canonical": "#cdd5f5",
+        "tonalRamp": [
+          "#080a16",
+          "#1f2333",
+          "#3a3f53",
+          "#565c75",
+          "#787f9c",
+          "#9da3be",
+          "#c3c9e2",
+          "#e8eeff"
+        ],
+        "dark": "#d3dbff"
+      },
+      "cobalt-tint": {
+        "role": "primary",
+        "displayName": "Cobalt Wash",
+        "canonical": "#e7ebfa",
+        "tonalRamp": [
+          "#090b10",
+          "#22242b",
+          "#3d3f49",
+          "#5a5d68",
+          "#7c808d",
+          "#a1a4b1",
+          "#c7cad5",
+          "#ebeef8"
+        ],
+        "dark": "#18213f"
+      },
+      "signal": {
+        "role": "secondary",
+        "displayName": "Signal Yellow",
+        "canonical": "#ffc400",
+        "tonalRamp": [
+          "#1d0300",
+          "#3c1a00",
+          "#5f3600",
+          "#835300",
+          "#ad7500",
+          "#cf9c00",
+          "#f1c456",
+          "#ffe98e"
+        ]
+      },
+      "signal-ink": {
+        "role": "secondary",
+        "displayName": "Signal Ink",
+        "canonical": "#1a1400",
+        "tonalRamp": [
+          "#0e0b02",
+          "#282414",
+          "#45402d",
+          "#645e47",
+          "#878066",
+          "#aba58c",
+          "#d1cbb4",
+          "#f4efdb"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Platform Concrete",
+        "canonical": "#eceef1",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#232426",
+          "#3e4042",
+          "#5c5e60",
+          "#7e8083",
+          "#a3a5a7",
+          "#c9cacd",
+          "#edeef1"
+        ],
+        "dark": "#0a0d14"
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Enamel",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#808080",
+          "#a4a4a4",
+          "#cacaca",
+          "#eeeeee"
+        ],
+        "dark": "#121722"
+      },
+      "panel-2": {
+        "role": "neutral",
+        "displayName": "Enamel Shade",
+        "canonical": "#f6f7f9",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#232425",
+          "#3f4041",
+          "#5d5e5f",
+          "#7f8082",
+          "#a4a4a6",
+          "#cacacc",
+          "#eeeef0"
+        ],
+        "dark": "#171d2a"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Line Ink",
+        "canonical": "#0f1420",
+        "tonalRamp": [
+          "#080b12",
+          "#20242d",
+          "#3b404b",
+          "#585e6b",
+          "#798090",
+          "#9ea5b3",
+          "#c4cbd8",
+          "#e9eefb"
+        ],
+        "dark": "#eef1f6"
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Timetable Grey",
+        "canonical": "#4a5263",
+        "tonalRamp": [
+          "#080b13",
+          "#1f242e",
+          "#3a404d",
+          "#565e6d",
+          "#788093",
+          "#9da5b6",
+          "#c3cbda",
+          "#e8effd"
+        ],
+        "dark": "#a3abbb"
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Fine Print",
+        "canonical": "#6b7385",
+        "tonalRamp": [
+          "#080b13",
+          "#1f242e",
+          "#3a404d",
+          "#575e6d",
+          "#788093",
+          "#9da5b6",
+          "#c3cbda",
+          "#e8effd"
+        ],
+        "dark": "#8790a3"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#d3d7de",
+        "tonalRamp": [
+          "#0a0b0e",
+          "#222428",
+          "#3d4044",
+          "#5b5e63",
+          "#7d8087",
+          "#a1a5ab",
+          "#c7cbd0",
+          "#eceff3"
+        ],
+        "dark": "#262d3b"
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Rule Strong",
+        "canonical": "#b8bec9",
+        "tonalRamp": [
+          "#090b0f",
+          "#21242a",
+          "#3c4047",
+          "#595e66",
+          "#7b808b",
+          "#a0a5ae",
+          "#c6cbd3",
+          "#eaeff7"
+        ],
+        "dark": "#343c4d"
+      },
+      "board": {
+        "role": "neutral",
+        "displayName": "Departures Black",
+        "canonical": "#10151f",
+        "tonalRamp": [
+          "#080b11",
+          "#20242c",
+          "#3b4049",
+          "#585e69",
+          "#7a808e",
+          "#9ea5b1",
+          "#c5cbd6",
+          "#e9eff9"
+        ],
+        "dark": "#161c29"
+      },
+      "board-2": {
+        "role": "neutral",
+        "displayName": "Board Row",
+        "canonical": "#19202d",
+        "tonalRamp": [
+          "#080b12",
+          "#1f242d",
+          "#3a404b",
+          "#565e6c",
+          "#788191",
+          "#9da5b4",
+          "#c3cbd9",
+          "#e8effb"
+        ],
+        "dark": "#1f2737"
+      },
+      "board-ink": {
+        "role": "neutral",
+        "displayName": "Board White",
+        "canonical": "#f2f4f8",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232426",
+          "#3e4042",
+          "#5c5e61",
+          "#7e8084",
+          "#a3a5a8",
+          "#c9cacd",
+          "#edeef1"
+        ]
+      },
+      "board-ink-2": {
+        "role": "neutral",
+        "displayName": "Board Grey",
+        "canonical": "#9aa3b5",
+        "tonalRamp": [
+          "#080b12",
+          "#1f242e",
+          "#3a404c",
+          "#575e6c",
+          "#788092",
+          "#9da5b5",
+          "#c3cbd9",
+          "#e8effc"
+        ]
+      },
+      "board-rule": {
+        "role": "neutral",
+        "displayName": "Board Rule",
+        "canonical": "#262e3d",
+        "tonalRamp": [
+          "#070b13",
+          "#1f242e",
+          "#39404c",
+          "#565e6d",
+          "#778192",
+          "#9ca5b6",
+          "#c3cbda",
+          "#e7effd"
+        ],
+        "dark": "#2c3547"
+      },
+      "go": {
+        "role": "tertiary",
+        "displayName": "Go Green",
+        "canonical": "#0e8a4a",
+        "tonalRamp": [
+          "#001300",
+          "#003009",
+          "#004f21",
+          "#00713a",
+          "#269756",
+          "#60bb7f",
+          "#91e0a9",
+          "#bdffd0"
+        ],
+        "dark": "#2fbf6f"
+      },
+      "stop": {
+        "role": "tertiary",
+        "displayName": "Stop Red",
+        "canonical": "#d3261c",
+        "tonalRamp": [
+          "#2d0000",
+          "#550000",
+          "#7f0000",
+          "#ac1d15",
+          "#de3d30",
+          "#ff7160",
+          "#ffa08e",
+          "#ffcbb9"
+        ],
+        "dark": "#f0533f"
+      },
+      "stop-tint": {
+        "role": "tertiary",
+        "displayName": "Stop Wash",
+        "canonical": "#fbe9e7",
+        "tonalRamp": [
+          "#100909",
+          "#2a2221",
+          "#483d3b",
+          "#675a59",
+          "#8c7c7a",
+          "#b0a19f",
+          "#d5c7c5",
+          "#f8ebea"
+        ],
+        "dark": "#2a1513"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing hero headline on the cobalt sign only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles and closing sign; 2.25rem mobile to 3rem desktop."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Stop names, panel and board headings, dialog titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading copy in ink-2; prose capped at 68ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, status lines, Send to."
+      },
+      "code": {
+        "displayName": "Room Code",
+        "purpose": "Room codes in chips, plates and code cells; tabular, tracked condensed."
+      }
+    },
+    "shadows": [
+      {
+        "name": "lift",
+        "value": "0 2px 4px rgb(15 20 32 / 0.06), 0 12px 32px rgb(15 20 32 / 0.12)",
+        "dark": "0 2px 4px rgb(0 0 0 / 0.3), 0 16px 40px rgb(0 0 0 / 0.5)",
+        "purpose": "Hero demo over the sign, dialogs, toasts."
+      },
+      {
+        "name": "rest",
+        "value": "0 1px 2px rgb(15 20 32 / 0.06), 0 2px 8px rgb(15 20 32 / 0.06)",
+        "dark": "0 1px 2px rgb(0 0 0 / 0.4)",
+        "purpose": "Defined for small resting elements; use sparingly."
+      },
+      {
+        "name": "sign-keyline",
+        "value": "inset 0 0 0 6px var(--cobalt), inset 0 0 0 8px rgb(255 255 255 / 0.92)",
+        "purpose": "Enamel-sign frame on cobalt fields."
+      },
+      {
+        "name": "sign-keyline-tight",
+        "value": "inset 0 0 0 4px var(--cobalt), inset 0 0 0 5.5px rgb(255 255 255 / 0.92)",
+        "purpose": "Keyline for small plates (404, rejoin)."
+      },
+      {
+        "name": "field-focus",
+        "value": "0 0 0 3px color-mix(in oklab, var(--cobalt) 25%, transparent)",
+        "purpose": "Focus halo on text fields."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid var(--signal); outline-offset: 2px",
+        "purpose": "Global :focus-visible ring."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Default easing for all state transitions."
+      },
+      {
+        "name": "state-fast",
+        "value": "150ms",
+        "purpose": "Colour and border transitions on buttons and fields."
+      },
+      {
+        "name": "press",
+        "value": "100ms translateY(1px)",
+        "purpose": "Button :active nudge."
+      },
+      {
+        "name": "flap-in",
+        "value": "320ms ease-out; clip-path inset(0 0 100% 0) to inset(0) with -4px rise",
+        "purpose": "Departures-board rows entering like a flap turning over."
+      },
+      {
+        "name": "live-pulse",
+        "value": "1.6s ease-in-out infinite, opacity 1 to 0.35",
+        "purpose": "Live / connecting dots."
+      },
+      {
+        "name": "board-sheen",
+        "value": "1.1s ease-out infinite translateX(-100% to 100%)",
+        "purpose": "Indeterminate yellow bar while a room opens."
+      },
+      {
+        "name": "hero-hop",
+        "value": "7s loop, 70% travel with cubic ease-out arc then rest",
+        "purpose": "Illustrative file hopping between two stops; freezes under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "The one primary action per region: Start a room, Save, Accept.",
+      "html": "<button class=\"ds-btn-signal\">Start a room <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-signal{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:6px;font-weight:600;font-size:15px;line-height:1;border:0;cursor:pointer;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),border-color 150ms cubic-bezier(0.16,1,0.3,1),transform 100ms cubic-bezier(0.16,1,0.3,1);background:var(--signal,#ffc400);color:var(--signal-ink,#1a1400);} .ds-btn-signal:hover{background:var(--signal-hover,#ffd23f);} .ds-btn-signal:active{transform:translateY(1px);} .ds-btn-signal:focus-visible{outline:3px solid var(--signal, #ffc400);outline-offset:2px;}"
+    },
+    {
+      "name": "Cobalt Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action off the sign field.",
+      "html": "<button class=\"ds-btn-primary\">Back to the platform</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:6px;font-weight:600;font-size:15px;line-height:1;border:0;cursor:pointer;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),border-color 150ms cubic-bezier(0.16,1,0.3,1),transform 100ms cubic-bezier(0.16,1,0.3,1);background:var(--cobalt,#1a3bc7);color:var(--cobalt-ink,#fff);} .ds-btn-primary:hover{background:var(--cobalt-deep,#1430a6);} .ds-btn-primary:active{transform:translateY(1px);} .ds-btn-primary:focus-visible{outline:3px solid var(--signal, #ffc400);outline-offset:2px;}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary actions on enamel: Invite, Lock, Join with a code.",
+      "html": "<button class=\"ds-btn-outline\">Join with a code</button>",
+      "css": ".ds-btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:6px;font-weight:600;font-size:15px;line-height:1;border:0;cursor:pointer;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),border-color 150ms cubic-bezier(0.16,1,0.3,1),transform 100ms cubic-bezier(0.16,1,0.3,1);background:var(--panel,#fff);color:var(--ink,#0f1420);border:1px solid var(--rule-strong,#b8bec9);} .ds-btn-outline:hover{border-color:var(--ink-3,#6b7385);background:var(--panel-2,#f6f7f9);} .ds-btn-outline:active{transform:translateY(1px);} .ds-btn-outline:focus-visible{outline:3px solid var(--signal, #ffc400);outline-offset:2px;}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Standard enamel field with cobalt focus halo.",
+      "html": "<input class=\"ds-field\" placeholder=\"Your name\" />",
+      "css": ".ds-field{width:280px;height:44px;padding:0 14px;background:var(--panel,#fff);color:var(--ink,#0f1420);border:1px solid var(--rule-strong,#b8bec9);border-radius:6px;font-size:16px;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;transition:border-color 150ms cubic-bezier(0.16,1,0.3,1);} .ds-field::placeholder{color:var(--ink-3,#6b7385);} .ds-field:hover{border-color:var(--ink-3,#6b7385);} .ds-field:focus-visible{outline:none;border-color:var(--cobalt,#1a3bc7);box-shadow:0 0 0 3px color-mix(in oklab,var(--cobalt,#1a3bc7) 25%,transparent);}"
+    },
+    {
+      "name": "Code Cells",
+      "kind": "input",
+      "refersTo": "code-cell",
+      "description": "Six-letter room code entry, one cell per character; active cell turns cobalt.",
+      "html": "<div class=\"ds-code\"><span class=\"ds-cell ds-filled\">K</span><span class=\"ds-cell ds-filled\">7</span><span class=\"ds-cell ds-filled\">Q</span><span class=\"ds-cell ds-active\"></span><span class=\"ds-cell\"></span><span class=\"ds-cell\"></span></div>",
+      "css": ".ds-code{display:flex;gap:8px;} .ds-cell{display:grid;place-items:center;width:40px;height:48px;border:2px solid var(--rule-strong,#b8bec9);border-radius:5px;background:var(--panel,#fff);color:var(--ink,#0f1420);font-family: var(--font-barlow-condensed), var(--font-barlow), ui-sans-serif, sans-serif;font-weight:700;font-size:24px;font-variant-numeric:tabular-nums;transition:border-color 150ms;} .ds-filled{border-color:var(--ink-3,#6b7385);} .ds-active{border-color:var(--cobalt,#1a3bc7);} .ds-cell:hover{border-color:var(--ink-3,#6b7385);}"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "button-on-cobalt",
+      "description": "Header on the cobalt sign: logo, ghost links, white Start a room.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-logo\">Hop</span><nav><a href=\"#\" class=\"ds-navlink\">How it works</a><a href=\"#\" class=\"ds-navlink\">Privacy</a><a href=\"#\" class=\"ds-navcta\">Start a room</a></nav></header>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;height:80px;padding:0 32px;background:var(--cobalt,#1a3bc7);color:#fff;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;} .ds-nav nav{display:flex;gap:8px;align-items:center;} .ds-logo{font-family: var(--font-barlow-condensed), var(--font-barlow), ui-sans-serif, sans-serif;font-weight:700;font-size:26px;} .ds-navlink,.ds-navcta{display:inline-flex;align-items:center;height:36px;padding:0 12px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;color:#fff;border:1px solid transparent;transition:background-color 150ms;} .ds-navlink:hover{background:rgb(255 255 255 / .12);border-color:rgb(255 255 255 / .7);} .ds-navcta{background:#fff;color:var(--cobalt,#1a3bc7);} .ds-navcta:hover{background:var(--cobalt-tint,#e7ebfa);} .ds-navlink:focus-visible,.ds-navcta:focus-visible{outline:3px solid var(--signal, #ffc400);outline-offset:2px;}"
+    },
+    {
+      "name": "Enamel Sign",
+      "kind": "card",
+      "refersTo": "sign",
+      "description": "Cobalt sign field with the inset white keyline; heroes and closing call to action.",
+      "html": "<div class=\"ds-sign\"><h2>Your platform is ready.</h2><button class=\"ds-sign-btn\">Start a room</button></div>",
+      "css": ".ds-sign{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:48px;border-radius:10px;background:var(--cobalt,#1a3bc7);color:#fff;box-shadow:inset 0 0 0 6px var(--cobalt,#1a3bc7),inset 0 0 0 8px rgb(255 255 255 / .92);font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;} .ds-sign h2{margin:0;font-family: var(--font-barlow-condensed), var(--font-barlow), ui-sans-serif, sans-serif;font-weight:700;font-size:40px;line-height:1;letter-spacing:-0.01em;} .ds-sign-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:6px;font-weight:600;font-size:15px;line-height:1;border:0;cursor:pointer;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),border-color 150ms cubic-bezier(0.16,1,0.3,1),transform 100ms cubic-bezier(0.16,1,0.3,1);height:56px;padding:0 24px;font-size:17px;background:var(--signal,#ffc400);color:var(--signal-ink,#1a1400);} .ds-sign-btn:hover{background:#ffd23f;} .ds-sign-btn:focus-visible{outline:3px solid var(--signal, #ffc400);outline-offset:2px;}"
+    },
+    {
+      "name": "Departures Board",
+      "kind": "custom",
+      "refersTo": "departures-board",
+      "description": "Transfer list: clock, file, destination, live yellow status and bottom progress bar.",
+      "html": "<section class=\"ds-board\"><div class=\"ds-board-h\">Departures</div><ul><li><span class=\"ds-t\">09:41</span><span class=\"ds-n\">trip-photos.zip</span><span class=\"ds-to\">Ana’s laptop</span><span class=\"ds-live\">Sending 62%</span><i style=\"width:62%\"></i></li><li><span class=\"ds-t\">09:40</span><span class=\"ds-n\">boarding-pass.pdf</span><span class=\"ds-to\">Ana’s laptop</span><span class=\"ds-done\">Arrived</span></li></ul></section>",
+      "css": ".ds-board{width:440px;border-radius:10px;overflow:hidden;background:var(--board,#10151f);color:var(--board-ink,#f2f4f8);font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;font-size:14px;} .ds-board-h{padding:12px 20px;border-bottom:1px solid var(--board-rule,#262e3d);font-family: var(--font-barlow-condensed), var(--font-barlow), ui-sans-serif, sans-serif;font-weight:700;font-size:20px;letter-spacing:.025em;} .ds-board ul{list-style:none;margin:0;padding:0;} .ds-board li{position:relative;display:grid;grid-template-columns:3rem 1fr 7rem 6.5rem;gap:12px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--board-rule,#262e3d);font-variant-numeric:tabular-nums;} .ds-board li:last-child{border:0;} .ds-board li:hover{background:var(--board-2,#19202d);} .ds-t,.ds-to{color:var(--board-ink-2,#9aa3b5);} .ds-n{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;} .ds-live{text-align:right;font-weight:700;color:var(--signal,#ffc400);} .ds-done{text-align:right;font-weight:700;} .ds-board i{position:absolute;left:0;bottom:0;height:3px;background:var(--signal,#ffc400);}"
+    },
+    {
+      "name": "Line Map",
+      "kind": "custom",
+      "refersTo": "tag-host",
+      "description": "People (or steps) as stops on a cobalt line; you are the yellow pip, host gets an interchange ring.",
+      "html": "<ol class=\"ds-line\"><li><span class=\"ds-stop ds-host\"><b></b></span>Maya <em class=\"ds-tag ds-you\">You</em><em class=\"ds-tag ds-hostt\">Host</em></li><li><span class=\"ds-stop\"></span>Ana</li><li><span class=\"ds-stop ds-off\"></span>Next stop: whoever you invite</li></ol>",
+      "css": ".ds-line{position:relative;list-style:none;margin:0;padding:0;font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;color:var(--ink,#0f1420);} .ds-line::before{content:'';position:absolute;left:11px;top:20px;bottom:20px;width:6px;border-radius:9px;background:var(--cobalt,#1a3bc7);} .ds-line li{position:relative;display:flex;align-items:center;gap:14px;padding:10px 0;font-weight:600;} .ds-stop{position:relative;z-index:1;display:grid;place-items:center;width:28px;height:28px;box-sizing:border-box;border-radius:50%;border:5px solid var(--cobalt,#1a3bc7);background:var(--panel,#fff);} .ds-stop b{width:8px;height:8px;border-radius:50%;background:var(--signal,#ffc400);} .ds-host{box-shadow:0 0 0 2px var(--panel,#fff),0 0 0 4px var(--cobalt,#1a3bc7);} .ds-off{border:3px dashed var(--rule-strong,#b8bec9);} .ds-line li:has(.ds-off){color:var(--ink-3,#6b7385);font-weight:400;} .ds-tag{font-style:normal;border-radius:3px;padding:2px 6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1;} .ds-you{background:var(--signal,#ffc400);color:var(--signal-ink,#1a1400);} .ds-hostt{background:var(--cobalt,#1a3bc7);color:#fff;}"
+    },
+    {
+      "name": "Pictogram Tile",
+      "kind": "chip",
+      "refersTo": "picto",
+      "description": "Wayfinding icon tile for service listings and the file drop zone.",
+      "html": "<span class=\"ds-picto\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 3 4 7l4 4\"/><path d=\"M4 7h16\"/><path d=\"m16 21 4-4-4-4\"/><path d=\"M20 17H4\"/></svg></span>",
+      "css": ".ds-picto{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:5px;background:var(--cobalt,#1a3bc7);color:#fff;transition:transform 200ms;} .ds-picto:hover{transform:translateY(-2px);}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Direct Service",
+    "overview": "Hop is a direct line between two browsers, and every surface is that line's station signage. The landing page opens on a full-bleed cobalt sign field; the room is a platform with a line diagram of the people aboard and a dark departures board where transfers tick over. Enamel-white panels sit on cool platform-concrete ground, cobalt is the single line colour, and signal yellow marks only what is live or what you should press next.\n\nDensity is calm and civic: big condensed headlines, generous section rhythm (about 112px between bands on desktop), and controls at a firm 44px touch height. Information is drawn as transit infrastructure rather than as cards: steps are stops on a line, people are stops on a line, transfers are departures. Depth is mostly tonal, with a single soft lift reserved for things that float over the sign (the hero demo, dialogs, toasts).\n\nThe system explicitly refuses the dark-glass gradient \"magic file drop\" hero: no gradients, no glow, no frosted panels over blurred colour fields. Dark surfaces exist only as the departures board, a functional object with a job.",
+    "keyCharacteristics": [
+      "One line colour (cobalt) on large sign fields, framed by an inset white keyline.",
+      "Signal yellow is scarce and functional: primary call to action, live state, \"you\", progress.",
+      "Barlow for reading, Barlow Semi Condensed for lettering on signs and headings.",
+      "Departures board (near-black, tabular numerals) for every list of transfers.",
+      "Metro line diagrams (6px cobalt bar, ringed stops) for sequences and people.",
+      "Full light and dark themes driven by the same token names via `prefers-color-scheme`."
+    ],
+    "rules": [
+      {
+        "name": "The One Line Rule",
+        "body": "Cobalt is the only hue that identifies Hop. No second brand colour, no gradient between colours. A surface is either on the sign (cobalt), on the platform (ground/enamel), or on the board (near-black).",
+        "section": "colors"
+      },
+      {
+        "name": "The Signal Rule",
+        "body": "Yellow means \"live\" or \"press this next\". At most one yellow button per view region; never use yellow as decoration or as a section background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sign Lettering Rule",
+        "body": "All h1–h3 are set in Barlow Semi Condensed bold with balanced wrapping and slight negative tracking. Body never uses the condensed face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Timetable Rule",
+        "body": "Any number that changes or aligns (clock, size, %, ETA, count, code) uses tabular numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The Enamel Rule",
+        "body": "Panels sit flat on the platform with a 1px rule. Shadow is earned only by floating over another surface.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put the most important statement on a full cobalt sign with the inset white keyline (6px cobalt, 2px white).",
+      "**Do** keep signal yellow for the one primary action and for live state, progress and \"you\".",
+      "**Do** draw sequences and groups of people as a metro line: 6px cobalt bar, 5px-ringed enamel stops.",
+      "**Do** show any list of transfers as the departures board, with tabular numerals and flap-in rows.",
+      "**Do** set h1–h3 in Barlow Semi Condensed bold and body in Barlow; cap prose at 68ch.",
+      "**Do** separate bands by alternating ground and enamel with 1px rules instead of shadows.",
+      "**Do** respect reduced motion: the hero demo freezes on a still frame and animations collapse to near-zero."
+    ],
+    "donts": [
+      "**Don't** use gradients, glows or frosted glass over colour fields; the dark-glass \"magic file drop\" hero is the explicit anti-reference.",
+      "**Don't** introduce a second brand hue or tint the ground with cobalt.",
+      "**Don't** use yellow as decoration, a section fill, or on more than one button in the same region.",
+      "**Don't** use the departures-board black for generic dark sections; it appears only where it carries transfer or \"never sees\" content.",
+      "**Don't** drop shadows on resting panels.",
+      "**Don't** add uppercase, letter-spaced labels above headings; the sign lettering carries hierarchy on its own."
+    ]
+  }
+}
